@@ -31,7 +31,7 @@ public class Game {
 	 * into the first room. It prints an introduction and then the main game
 	 * loop begins
 	 */
-	public void startGame() {
+public void startGame() {
 		
 		System.out.println("Thank you for playing SpongeBob's Best Day Ever!");
 		System.out.println("Help SpongeBob complete his task and make it to the "
@@ -40,23 +40,25 @@ public class Game {
 		Inventory inventory = new Inventory(); //new empty inventory for the  user
 		
 		// TODO: replace with the actual room sequence once all the roomsubclasses are done.
-		// shoulb be like this:
+		// should be like this:
 		// Room spongebobsHouse = new SpongeBobsHouse();
 		// Room squidwardsHouse = new SquidwardsHouse();
+		// Room patricksRock = new PatricksRock();
 		
+		// link rooms in order of progression
 		// spongebobsHouse.setNextRoom(squidwardsHouse);
 		// squidwardsHouse.setNextRoom(patricksRock);
 		
 		
-		//tempory place holder until all the room subclasees are done
-		this.currentRoom = new Room("SpongeBob's House", "find SpongeBob's hat and "
-				+ "feed Gary", false, null);
+		// Starting point for the game
+		// this.currentRoom = spongebobsHouse;
 		
 		this.player = new Player(); // initialize the player
 		this.isGameRunning = true; //starting the main loop
 		runGameLoop();		
 		
 	}
+	
 	
 	/**
 	 * the main loop of the game and runs until the player decides to stop
