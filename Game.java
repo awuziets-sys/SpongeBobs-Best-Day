@@ -39,6 +39,14 @@ public class Game {
 		
 		Inventory inventory = new Inventory(); //new empty inventory for the  user
 		
+		// TODO: replace with the actual room sequence once all the roomsubclasses are done.
+		// shoulb be like this:
+		// Room spongebobsHouse = new SpongeBobsHouse();
+		// Room squidwardsHouse = new SquidwardsHouse();
+		
+		// spongebobsHouse.setNextRoom(squidwardsHouse);
+		// squidwardsHouse.setNextRoom(patricksRock);
+		
 		
 		//tempory place holder until all the room subclasees are done
 		this.currentRoom = new Room("SpongeBob's House", "find SpongeBob's hat and "
@@ -75,7 +83,13 @@ public class Game {
 	}
 	
 	public void moveToNextRoom() {
-		// TODO: 
+		if (currentRoom.getNextRoom() != null) {
+			currentRoom = currentRoom.getNextRoom();
+			System.out.println("You are moving to room: " + currentRoom.getRoomName() + ".");
+		} else {
+			System.out.println("There are no more rooms. Congratulations on completing the game!");
+			endGame();
+		}
 	}
 	
 	/**
