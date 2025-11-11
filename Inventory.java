@@ -1,3 +1,10 @@
+/**
+ * Class: Inventory
+ * Author: Andrew
+ * Purpose: manages the players collected items. Handles adding
+ * removing, checking, and printing the item info.
+ */
+
 import java.util.Arrays;
 
 public class Inventory {
@@ -10,8 +17,13 @@ public class Inventory {
         this.size = 0;
     }
     
+    /**
+     * 
+     * @param item
+     * @return
+     */
     public boolean addItem(Item item) {
-        if (this.size == this.size.length) {
+        if (size == items.length) {
             items = Arrays.copyOf(items, size * 2);
         }
         
@@ -21,6 +33,11 @@ public class Inventory {
         return true;
     }
     
+    /**
+     * 
+     * @param itemName
+     * @return
+     */
     public Item removeItem(String itemName) {
         int index = getIndex(itemName);
         
@@ -39,16 +56,35 @@ public class Inventory {
         return res;
     }
     
+    /**
+     * 
+     * @param itemName
+     * @return
+     */
     public boolean contains(String itemName) {
         return getIndex(itemName) != -1;
     }
     
+    /**
+     * 
+     * @param itemName
+     * @return
+     */
     public String printInfo(String itemName) {
         int index  = getIndex(itemName);
+        
+        if (index == -1) {
+        	return "Item not found";
+        }
         
         return items[index].getName();
     }
     
+    /**
+     * 
+     * @param itemName
+     * @return
+     */
     private int getIndex(String itemName) {
         for (int i = 0; i < this.size; i++) {
             if (this.items[i].getName().equals(itemName)) {
