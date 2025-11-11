@@ -32,7 +32,8 @@ public class Player {
      * @param room the room to enter
      */
     public void enterRoom(Room room) {
-        currentRoom = room;
+        this.currentRoom = room;
+        System.out.println(name + " moved to " + room.getRoomName());
     }
     
     /**
@@ -41,13 +42,15 @@ public class Player {
      * @return true if successful, false
      */
     public boolean pickup(Item item) {
-        // TODO: Add pickup logic logic once Inventory class is implemented 
-    	// ex: 
-    	// if (item != null) {
-    	// 		inventory.addItem(item);
-    	// 		return true;
-    	// }
-        return false;
+    	if (item !=null) {
+    		inventory.addItem(item);
+    		System.out.println(item.getName() + " was added to your inventory");
+    		return true;
+    	} else {
+    		System.out.println("nothing to pick up.");
+    		return false;
+    	}
+
     }
     
     /**
@@ -57,9 +60,12 @@ public class Player {
      * @return true if the use is successful, false if not
      */
     public boolean use(Item item, Object target) {
-        // TODO: add use 
-        
-        return false;
+        if (item == null) {
+        	System.out.println("You dont have the item.");
+        	return false;
+        }
+        System.out.println(name + " use " + item.getName() + " on " + target);
+        return item.use(target);
     }
     
     /**
@@ -69,9 +75,20 @@ public class Player {
      * @return a new combined item or null if the combination doesnt work
      */
     public Item combine(Item item1, Item item2) {
-        // TODO: Add combine code
-        
-        return null;
+    	 if (item1 == null || item2 == null) {
+             System.out.println("You need two items to combine.");
+             return null;
+         }
+
+         // placeholder logic for combining (can be expanded later)
+         String combinedName = item1.getName() + " + " + item2.getName();
+         String combinedDesc = "new item created by combining " 
+                                 + item1.getName() + " and " + item2.getName() + ".";
+         Item newItem = new Item(combinedName, combinedDesc);
+
+         System.out.println("You combined " + item1.getName() + " and " + item2.getName() + " to make " + newItem.getName());
+         return newItem;        
+
     }
     
     /**
@@ -80,5 +97,9 @@ public class Player {
      */
     public Inventory getInventory() {
     	return inventory;
+    }
+    
+    public Room getCurrentRoom() {
+    	return currentRoom;
     }
 }
