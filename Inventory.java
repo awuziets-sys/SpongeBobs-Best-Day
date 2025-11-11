@@ -18,25 +18,22 @@ public class Inventory {
     }
     
     /**
-     * 
-     * @param item
-     * @return
+     * Function to add an item to the items arraw 
+     * @param item: the item to add
      */
-    public boolean addItem(Item item) {
+    public void addItem(Item item) {
         if (size == items.length) {
             items = Arrays.copyOf(items, size * 2);
         }
         
         items[size] = item;
         size++;
-        
-        return true;
     }
     
     /**
-     * 
-     * @param itemName
-     * @return
+     * Function to return and remove an item from the array
+     * @param itemName: the name of the item to remove
+     * @return: the item that was removed
      */
     public Item removeItem(String itemName) {
         int index = getIndex(itemName);
@@ -57,18 +54,18 @@ public class Inventory {
     }
     
     /**
-     * 
-     * @param itemName
-     * @return
+     * Function to check if the array contains a certain item
+     * @param itemName: The name of the item to check
+     * @return: whether or not the inventory contains the item
      */
     public boolean contains(String itemName) {
         return getIndex(itemName) != -1;
     }
     
     /**
-     * 
-     * @param itemName
-     * @return
+     * Function to print the name of an item.
+     * @param itemName: the name of the item to find
+     * @return: The items name or description
      */
     public String printInfo(String itemName) {
         int index  = getIndex(itemName);
@@ -78,12 +75,13 @@ public class Inventory {
         }
         
         return items[index].getName();
+        // change to description maybe?
     }
     
     /**
-     * 
-     * @param itemName
-     * @return
+     * Helper method to find the index of an item
+     * @param itemName: The name of the item
+     * @return: The index that contains the item
      */
     private int getIndex(String itemName) {
         for (int i = 0; i < this.size; i++) {
