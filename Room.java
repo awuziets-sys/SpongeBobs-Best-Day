@@ -108,7 +108,5 @@ public abstract class Room {
 		// TODO:
 		return null;
 
-	public String getRoomName() {
-		return roomName;
     }
 }
