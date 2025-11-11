@@ -1,4 +1,3 @@
-
 public class Player {
     private Room currentRoom;
     private Inventory inventory;
@@ -13,13 +12,11 @@ public class Player {
     }
     
     public void enterRoom(Room room) {
-        currentRoom = room;
+        this.currentRoom = room;
     }
     
     public boolean pickup(Item item) {
-        // Add pickup code
-        
-        return false;
+        return this.inventory.addItem(item);
     }
     
     public boolean use(Item item, Object target) {
