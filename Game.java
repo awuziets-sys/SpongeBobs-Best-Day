@@ -53,7 +53,7 @@ public void startGame() {
 		// Starting point for the game
 		// this.currentRoom = spongebobsHouse;
 		
-		this.player = new Player(); // initialize the player
+		this.player = new Player(currentRoom, inventory, "001", "SpongeBob"); // initialize the player
 		this.isGameRunning = true; //starting the main loop
 		runGameLoop();		
 		
