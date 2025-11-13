@@ -8,13 +8,13 @@
 * Purpose: – Item Class Definition
  */
 public class Item {
-	private String name;
-	private String description;
+	private String name; // the name of the item
+	private String description; // description of the item
 	
 	/**
 	 * Item Constructor
-	 * @param name
-	 * @param description
+	 * @param name: the name of the item
+	 * @param description: item description
 	 */
 	public Item(String name, String description) {
 		this.name = name;
@@ -27,7 +27,7 @@ public class Item {
 	 * @return
 	 */
 	public boolean use(Object target) {
-		// TODO:
+		System.out.println("You used " + name + " on " + target);
 		return false;
 	}
 	
@@ -38,4 +38,28 @@ public class Item {
 	public String getName() {
 		return name;
 	}
+	
+	/**
+	 * gets the description of the item
+	 * @return the item description
+	 */
+	public String getDescription() {
+		return description;
+	}
+	
+	/**
+	 * sets a description for the item
+	 * @param description
+	 */
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
+	/**
+	 * the items details
+	 */
+	public void printInfo() {
+		System.out.println("Item: " + name + " -- " + description); 
+	}
+			
 }
