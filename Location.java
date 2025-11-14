@@ -4,7 +4,7 @@
  * @author Talan Malicote
  * @version 1.0 Course: CSE 201 Fall 2025 Written: November 10, 2025
  *
- *          Purpose: – Location Class Definition
+ * Purpose: – Location Class Definition
  */
 public class Location {
 	private String locationName;
@@ -32,7 +32,7 @@ public class Location {
 	 */
 	public Location search() {
 		if (items != null) {
-			System.out.println("You found an item: " + item.getName());
+			System.out.println("You found an item: " + items.getName());
 			return this;
 		}
 
@@ -49,7 +49,7 @@ public class Location {
 	 * Adds Item to Location
 	 * If an item already exists, it will be replaced
 	 * 
-	 * @para item the item to add
+	 * @param item the item to add
 	 */
 	public void addItem(Item item) {
 		if (item == null) {
@@ -58,7 +58,7 @@ public class Location {
 		}
 		
 		if (this.items != null) {
-			System.out.println("Replacing existing item (" + this.item.getName() + ") with " item.getName() + ".");
+			System.out.println("Replacing existing item (" + this.items.getName() + ") with " + items.getName() + ".");
 		} else {
 			System.out.println("Adding " + item.getName() + " to " + locationName + ".");
 		}
