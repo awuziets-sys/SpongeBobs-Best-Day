@@ -10,15 +10,20 @@
 public class Item {
 	private String name; // the name of the item
 	private String description; // description of the item
+	private String useTarget; // what the player must use it on to work. null for no use
+	private String hintText; // hint text if the player uses it incorrectly
 	
 	/**
 	 * Item Constructor
 	 * @param name: the name of the item
 	 * @param description: item description
+	 * @param useTarget: the valid use location/item for this object
 	 */
-	public Item(String name, String description) {
+	public Item(String name, String description, String useTarget, String hintText) {
 		this.name = name;
 		this.description = description;
+		this.useTarget = useTarget;
+		this.hintText = hintText;
 	}
 	
 	/**
@@ -26,9 +31,18 @@ public class Item {
 	 * @param target
 	 * @return
 	 */
-	public boolean use(Object target) {
-		System.out.println("You used " + name + " on " + target);
-		return false;
+	public boolean use(String target) {
+		if (useTarget == null) {
+		    System.out.println("It looks like this item can't be used...");
+		    return false;
+		}
+		if (useTarget.toLowerCase().equals(target.toLowerCase())) {
+		    System.out.println("You used " + name + " on " + target);
+	        return true;
+		}
+		System.out.println("It looks like you can't use " + name + " on " + target +
+		        "\nTry using it on \"" + hintText + "\"");
+        return false;
 	}
 	
 	/**
