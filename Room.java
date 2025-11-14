@@ -3,7 +3,7 @@
 * @author Testimony Awuzie
 * @version 1.0
 * Course : CSE 201 Fall 2025
-* Written: November 6, 2025
+* Written: November 14, 2025
 *
 * Purpose: – Abstract parent class representing a generic room in SpongeBob’s Best Day Ever game.
  * - Each specific room (like SpongeBob’s Pineapple, Sandy’s Dome, etc.)
@@ -98,15 +98,5 @@ public abstract class Room {
      */
     public void setNextRoom(Room nextRoom) {
         this.nextRoom = nextRoom;
-    }
-    
-    /**
-     * Gets Locations in a Room
-     * @return
-     */
-    public Location getLocations() {
-		// TODO:
-		return null;
-
     }
 }
