@@ -59,7 +59,7 @@ public class Player {
      * @param target: the target the item is used on
      * @return true if the use is successful, false if not
      */
-    public boolean use(Item item, Object target) {
+    public boolean use(Item item, String target) {
         if (item == null) {
         	System.out.println("You dont have the item.");
         	return false;
@@ -84,7 +84,7 @@ public class Player {
          String combinedName = item1.getName() + " + " + item2.getName();
          String combinedDesc = "new item created by combining " 
                                  + item1.getName() + " and " + item2.getName() + ".";
-         Item newItem = new Item(combinedName, combinedDesc);
+         Item newItem = new Item(combinedName, combinedDesc, null, null);
 
          System.out.println("You combined " + item1.getName() + " and " + item2.getName() + " to make " + newItem.getName());
          return newItem;        

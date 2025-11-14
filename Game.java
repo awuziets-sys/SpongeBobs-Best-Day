@@ -24,6 +24,7 @@ public class Game {
 	public Game() {
 		this.isGameRunning = false;
 		this.userInput = new Scanner(System.in);
+		startGame();
 	}
 	
 	/**
@@ -31,7 +32,7 @@ public class Game {
 	 * into the first room. It prints an introduction and then the main game
 	 * loop begins
 	 */
-public void startGame() {
+	public void startGame() {
 		
 		System.out.println("Thank you for playing SpongeBob's Best Day Ever!");
 		System.out.println("Help SpongeBob complete his task and make it to the "
@@ -41,9 +42,10 @@ public void startGame() {
 		
 		// TODO: replace with the actual room sequence once all the roomsubclasses are done.
 		// should be like this:
-		// Room spongebobsHouse = new SpongeBobsHouse();
+		Room spongebobsHouse = new SpongebobsHouse();
 		// Room squidwardsHouse = new SquidwardsHouse();
 		// Room patricksRock = new PatricksRock();
+		
 		
 		// link rooms in order of progression
 		// spongebobsHouse.setNextRoom(squidwardsHouse);
@@ -51,12 +53,11 @@ public void startGame() {
 		
 		
 		// Starting point for the game
-		// this.currentRoom = spongebobsHouse;
+		this.currentRoom = spongebobsHouse;
 		
 		this.player = new Player(currentRoom, inventory, "001", "SpongeBob"); // initialize the player
 		this.isGameRunning = true; //starting the main loop
 		runGameLoop();		
-		
 	}
 	
 	
@@ -65,22 +66,10 @@ public void startGame() {
 	 */
 	private void runGameLoop() {
 		while (isGameRunning) {
-			System.out.println("Current Room: " + currentRoom.getClass());
-			System.out.println("What do you want to do?");
-			System.out.println("[1] Enter Room, [2] Check Progress, [3] End Game");
-			
-			String userChoice = userInput.nextLine();
-			if (userChoice.equals("1")) {
-				enterRoom();
-			}
-			else if (userChoice.equals("2")) {
-				checkProgress();
-			}
-			else if (userChoice.equals("3")) {
-				endGame();
-			}
-			else 
-				System.out.println("You entered an invalid option. Try again");
+			System.out.println("Current Room: " + currentRoom.getRoomName());
+			currentRoom.enterRoom(player);
+			currentRoom.runRoom();
+			moveToNextRoom();
 		}
 	}
 	
@@ -100,7 +89,7 @@ public void startGame() {
 	public void enterRoom() {
 		
 		System.out.println("Entering " + currentRoom.getClass());
-		currentRoom.enterRoom();
+		//currentRoom.enterRoom();
 	}
 	
 	/**
