@@ -68,6 +68,10 @@ public class SpongebobsHouse extends Room {
         
         //setting the start room
         currLocation = bedroom;
+
+        System.out.println("Good morning Spongebob! It's another exciting day in Bikini Bottom.\n" 
+                          + "Before you can take on the world you need to get ready.\n"
+                          + "Put on your Work Hat and feed Gary before moving on with your day.\n");
     }
     
     @Override
@@ -78,7 +82,10 @@ public class SpongebobsHouse extends Room {
         
         return false;
     }
-    
+
+    /**
+     * Main loop method to read userInput and run all required methods
+    */
     @Override
     public void runRoom() {
         Scanner userInput = new Scanner(System.in);
@@ -114,6 +121,7 @@ public class SpongebobsHouse extends Room {
                 System.out.println("Spongebob feeds Gary his food and puts on his trusty hat "
                         + "before heading off to begin the day!");
                 player.getInventory().removeItem("Gary's Food");
+                userInput.close();
                 return;
             }
         }
@@ -159,3 +167,4 @@ public class SpongebobsHouse extends Room {
         }
     }
 }
+
