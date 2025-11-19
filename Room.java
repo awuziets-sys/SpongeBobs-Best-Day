@@ -3,7 +3,7 @@
 * @author Testimony Awuzie
 * @version 1.0
 * Course : CSE 201 Fall 2025
-* Written: November 14, 2025
+* Written: November 6, 2025
 *
 * Purpose: – Abstract parent class representing a generic room in SpongeBob’s Best Day Ever game.
  * - Each specific room (like SpongeBob’s Pineapple, Sandy’s Dome, etc.)
@@ -40,13 +40,18 @@ public abstract class Room {
 	 * Defines what happens when the player enters this room.
      * Must be implemented by each subclass.
 	 */
-	public abstract void enterRoom();
+	public abstract void enterRoom(Player player);
 	
 	/**
      * Checks if the room’s goal has been completed.
      * @return true if the room is complete, false otherwise
      */
 	public abstract boolean checkCompletionOfRoom();
+	
+	/**
+	 * Runs the generic methods for the room until completed.
+	 */
+	public abstract void runRoom();
 	
 	/**
 	 * Marks The Room as complete
