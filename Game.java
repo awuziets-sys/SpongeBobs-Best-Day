@@ -157,7 +157,7 @@ public class Game {
 	 * Prints SpongeBob's Current Inventory
 	 */
 	private void checkInventory() {
-        System.out.println("\n🧳 Checking inventory...");
+        System.out.println("\nChecking inventory...");
         player.getInventory().printInventory();
     }
 	
