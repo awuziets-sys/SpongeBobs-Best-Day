@@ -62,8 +62,8 @@ public class Game {
 		printIntro();
 		isGameRunning = true; // Starting the main loop
 
-		System.out.println("\nWould you like to enter SpongeBob’s House or end the game?");
-        System.out.println("Type 'enter' to begin, or 'quit' to exit.");
+		System.out.println("\nWould you like to begin the game and enter SpongeBob’s House?");
+        System.out.println("Type 'enter' to begin, or 'quit' to end the game.");
 
         while (isGameRunning) {
             System.out.print("> ");
@@ -180,7 +180,7 @@ public class Game {
      * Prints item descriptions (if available).
      */
     private void describeItems() {
-        System.out.println("\n Item Descriptions:");
+        System.out.println("\nItem Descriptions:");
         player.getInventory().printAllItemDescriptions();
     }
     
