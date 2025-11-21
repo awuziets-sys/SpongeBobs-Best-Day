@@ -25,19 +25,24 @@ public class SquidwardsHouse extends Room {
 	public SquidwardsHouse(String roomName, String roomDescription, boolean roomComplete, Room nextRoom) {
 		super(roomName, roomDescription, roomComplete, nextRoom);
 	}
+	
+	public SquidwardsHouse() {
+        this("Squidwards's House", "The second level of the game!", false, null);
+    }
 
     /**
      * Prints descriptions and the available options for entering Squidward's house.
      * This method is called when the player arrives at the room.
      */
 	@Override
-	public void enterRoom() {
+	public void enterRoom(Player player) {
 		System.out.println("You arrive at " + getRoomName() + ".");
 		System.out.println(getRoomDescription());
 		System.out.println("Options to enter:");
 		System.out.println("1. Blow up the door");
 		System.out.println("2. Catapult yourself through the window");
-		System.out.println("3. Tunnel underground to the living room");
+		System.out.println("3. Tunnel underground to the living room\n");
+        System.out.print("> ");
 	}
 
 	/**
@@ -46,7 +51,7 @@ public class SquidwardsHouse extends Room {
 	 * @param choice the method number (1, 2, or 3)
 	 */
 	@Override
-	public void runroom() {
+	public void runRoom() {
 		Scanner userInput = new Scanner(System.in);
 		int choice = userInput.nextInt(); //
 		switch (choice) {
