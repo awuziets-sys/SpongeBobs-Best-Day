@@ -1,125 +1,124 @@
+import java.util.Arrays;
+
 /**
  * Class: Inventory
- * Author: Andrew Albert
- * Purpose: manages the players collected items. Handles adding
- * removing, checking, and printing the item info.
+ * @author: Andrew Albert, Testimony Awuzie
+ * Purpose: Manages the player’s collected items. Handles adding, removing,
+ * checking, and printing item info.
  */
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 public class Inventory {
-    List<Item> items = new ArrayList<>();
-    
+    private Item[] items;
+    private int size;
+    private final int DEFAULT_SIZE = 10;
+
     public Inventory() {
-        
+        this.items = new Item[DEFAULT_SIZE];
+        this.size = 0;
     }
-    
+
     /**
-     * Function to add an item to the items arraw 
-     * @param item: the item to add
+     * Adds an item to the inventory.
+     * @param item the item to add
      */
     public void addItem(Item item) {
-        items.add(item);
+        if (size == items.length) {
+            items = Arrays.copyOf(items, size * 2);
+        }
+
+        items[size] = item;
+        size++;
     }
-    
+
     /**
-     * Function to return and remove an item from the array
-     * @param itemName: the name of the item to remove
-     * @return: the item that was removed
+     * Removes an item by name and returns it.
+     * @param itemName the name of the item to remove
+     * @return the removed item, or null if not found
      */
     public Item removeItem(String itemName) {
         int index = getIndex(itemName);
-        
-        if (index != -1) {
-            return items.remove(index);
+
+        if (index == -1) {
+            System.out.println("Item not found in inventory.");
+            return null;
         }
-        
-        return null;
+
+        Item removed = items[index];
+
+        // Shift remaining items left
+        for (int i = index; i < size - 1; i++) {
+            items[i] = items[i + 1];
+        }
+
+        items[--size] = null;
+        return removed;
     }
-    
+
     /**
-     * Function to check if the array contains a certain item
-     * @param itemName: The name of the item to check
-     * @return: whether or not the inventory contains the item
+     * Checks whether an item exists in the inventory.
+     * @param itemName the item to search for
+     * @return true if found, false otherwise
      */
     public boolean contains(String itemName) {
         return getIndex(itemName) != -1;
     }
-    
-    public Item getItem(String itemName) {
-        int index  = getIndex(itemName);
-        
-        if (index == -1) {
-            return null;
-        }
-        
-        return items.get(index);
-    }
-    
+
     /**
-     * Function to print the name of an item.
-     * @param itemName: the name of the item to find
-     * @return: The items name or description
+     * Returns description of a specific item.
+     * @param itemName the item name
+     * @return the description if found, otherwise message
      */
     public String printInfo(String itemName) {
-        int index  = getIndex(itemName);
-        
+        int index = getIndex(itemName);
+
         if (index == -1) {
-        	return "Item not found";
+            return "Item not found.";
         }
-        
-        return items.get(index).getDescription();
-        // change to description maybe?
+
+        return " " + items[index].getName() + ": " + items[index].getDescription();
     }
-    
+
     /**
-     * Helper method to find the index of an item
-     * @param itemName: The name of the item
-     * @return: The index that contains the item
+     * Helper to find an item’s index.
+     * @param itemName name of the item
+     * @return index or -1 if not found
      */
     private int getIndex(String itemName) {
-        for (int i = 0; i < items.size(); i++) {
-            if (items.get(i).getName().equals(itemName)) {
+        for (int i = 0; i < this.size; i++) {
+            if (this.items[i].getName().equalsIgnoreCase(itemName)) {
                 return i;
             }
         }
         return -1;
     }
-    
-    public String toString() {
-        String res = "";
-        for (Item i : items) {
-            res += i.getName() + "\n";
-        }
-        return res;
-    }
+
     /**
-     * prints all the item names in the inventory
+     * Prints all items currently in the inventory.
+     * @return 
      */
     public void printInventory() {
-    	if (items.isEmpty()) {
-    		System.out.println("Your inventory is empty.");
-    		return;
-    		
-    	}
-    	System.out.println("Items in Inventory:");
-    	for (Item i : items) {
-    		System.out.println("- " + i.getName());
-    	}
+        if (size == 0) {
+            System.out.println("Inventory is empty!");
+            return;
+        }
+
+        System.out.println("Current Inventory:");
+        for (int i = 0; i < size; i++) {
+            System.out.println("  - " + items[i].getName());
+        }
     }
+
     /**
-     * prints all the item descriptions
+     * Prints descriptions for all items in inventory.
      */
-	public void printAllItemDescriptions() {
-		if (items.isEmpty()) {
-			System.out.println("No items to describe.");
-			return;
-		}
-		System.out.println("Item description:");
-		for (Item i : items) {
-			System.out.println(i.getName() + ": " + i.getDescription());
-		}
-	}
+    public void printAllItemDescriptions() {
+        if (size == 0) {
+            System.out.println("No items to describe — your inventory is empty!");
+            return;
+        }
+
+        System.out.println("Item Descriptions:");
+        for (int i = 0; i < size; i++) {
+            System.out.println("• " + items[i].getName() + " — " + items[i].getDescription());
+        }
+    }
 }
