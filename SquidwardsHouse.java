@@ -54,12 +54,12 @@ public class SquidwardsHouse extends Room {
 			break;
 		case 3:
 			System.out.println("You dig a tunnel underground, and pop up right in Squidward’s living room!");
-			System.out.println("Squidward: 'SPONGEBOB! What are you doing in my house?!'");
+			System.out.println("Squidward: 'SPONGEBOB! What are you doing in my house?'");
 			enteredSuccessfully = true;
 			completeRoom();
 			break;
 		default:
-			System.out.println("That’s not a valid option. Try again!");
+			System.out.println("That’s not a valid option. Try again.");
 		}
 	}
 
@@ -74,3 +74,4 @@ public class SquidwardsHouse extends Room {
 		return enteredSuccessfully;
 	}
 }
+
