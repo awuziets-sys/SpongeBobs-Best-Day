@@ -95,4 +95,31 @@ public class Inventory {
         }
         return res;
     }
+    /**
+     * prints all the item names in the inventory
+     */
+    public void printInventory() {
+    	if (items.isEmpty()) {
+    		System.out.println("Your inventory is empty.");
+    		return;
+    		
+    	}
+    	System.out.println("Items in Inventory:");
+    	for (Item i : items) {
+    		System.out.println("- " + i.getName());
+    	}
+    }
+    /**
+     * prints all the item descriptions
+     */
+	public void printAllItemDescriptions() {
+		if (items.isEmpty()) {
+			System.out.println("No items to describe.");
+			return;
+		}
+		System.out.println("Item description:");
+		for (Item i : items) {
+			System.out.println(i.getName() + ": " + i.getDescription());
+		}
+	}
 }
