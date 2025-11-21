@@ -5,9 +5,11 @@ import java.util.List;
  * Class: Location
  * 
  * @author Talan Malicote
- * @version 1.0 Course: CSE 201 Fall 2025 Written: November 10, 2025
+ * @version 1.0 
+ * Course: CSE 201 Fall 2025 
+ * Written: November 10, 2025
  *
- *          Purpose: – Location Class Definition
+ * Purpose: – Location Class Definition
  */
 public class Location {
 	private String locationName;
@@ -87,26 +89,27 @@ public class Location {
 	 */
 	public Item removeItem(String itemName) {
 		if (items == null) {
-			System.out.println("There are no items in " + locationName + "to remove.");
-			return null;
-		}
+	        System.out.println("There are no items in " + locationName + " to remove.");
+	        return null;
+	    }
 
-		if (items.getName().equals(itemName)) {
-			Item removedItem = items;
-			System.out.println("Removed " + removedItem.getName() + " from " + locationName + ".");
-			return removedItem;
-		}
+	    if (items.getName().equalsIgnoreCase(itemName)) {
+	        Item removedItem = items;
+	        items = null; // 
+	        System.out.println("Removed " + removedItem.getName() + " from " + locationName + ".");
+	        return removedItem;
+	    }
 
-		System.out.println(itemName + " not found in " + locationName + ".");
-		return null;
-
+	    System.out.println(itemName + " not found in " + locationName + ".");
+	    return null;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public boolean hasItem() {
-	    if (items == null) {
-	        return false;
-	    }
-	    return true;
+	    return items != null;
 	}
 	
 	/*
