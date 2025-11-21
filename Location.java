@@ -38,26 +38,32 @@ public class Location {
 	 * @return A boolean for whether anything was found
 	 */
 	public boolean search() {
-		boolean found = false;
-	    
-	    if (items != null) {
-			System.out.println("You found an item: " + items.getName());
-			found = true;
-		}
+	    boolean found = false;
 
-		if (subLocations != null) {
-			found = true;
-		    System.out.println("This room connects to: ");
-			for(Location l : subLocations) {
-			    System.out.println(l.getLocationName());
-			}
-		}
-		
-		if (found == false) {
-		    System.out.println("No items or locations found in " + locationName);
-		}
-		
-		return found;
+	    if (items != null) {
+	        System.out.println("You found an item: " + items.getName());
+	        found = true;
+	    }
+
+	    if (!subLocations.isEmpty()) {
+	        found = true;
+
+	        String subNames = "";
+	        for (int i = 0; i < subLocations.size(); i++) {
+	            subNames += subLocations.get(i).getLocationName();
+	            if (i < subLocations.size() - 1) {
+	                subNames += ", ";
+	            }
+	        }
+
+	        System.out.println("This room connects to: " + subNames);
+	    }
+
+	    if (!found) {
+	        System.out.println("No items or locations found in " + locationName);
+	    }
+
+	    return found;
 	}
 
 	/**
