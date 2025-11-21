@@ -51,20 +51,22 @@ public class SpongebobsHouse extends Room {
         
         //Adding locations to the list
         locationsList.add(bedroom);
+        locationNameList.add(bedroom.getLocationName());
         locationsList.add(kitchen);
+        locationNameList.add(kitchen.getLocationName());
         locationsList.add(closet);
+        locationNameList.add(closet.getLocationName());
         locationsList.add(stairs);
+        locationNameList.add(stairs.getLocationName());
         locationsList.add(livingroom);
+        locationNameList.add(livingroom.getLocationName());
         locationsList.add(bathroom);
+        locationNameList.add(bathroom.getLocationName());
         
         //setting the player for ease of access
         this.player = player;
         
-        for (Location l : locationsList) {
-            locationNameList.add(l.getLocationName());
-        }
-        
-        // setting the start room
+        //setting the start room
         currLocation = bedroom;
 
         System.out.println("Good morning Spongebob! It's another exciting day in Bikini Bottom.\n" 
@@ -74,8 +76,11 @@ public class SpongebobsHouse extends Room {
     
     @Override
     public boolean checkCompletionOfRoom() {
-    	return player.getInventory().contains("Work Hat")
-                && player.getInventory().contains("Gary's Food");
+        if (player.getInventory().contains("Work Hat") && player.getInventory().contains("Gary's Food")) {
+            return true;
+        }
+        
+        return false;
     }
 
     /**
@@ -88,18 +93,18 @@ public class SpongebobsHouse extends Room {
         while(!super.isRoomComplete()) {
             System.out.println("\nYou are in " + currLocation.getLocationName());
             System.out.println("What would you like to do?\n"
-                    + "1] Search\n2] Move [Location Name]\n3] Take \n4] See Inventory");
-            System.out.print("i> ");
+                    + "1] Search\n2] Move [Location Name]\n3] Take \n4] See Inventory\n5] Quit");
+            System.out.print("> ");
             
             String choice = userInput.nextLine();
             
-            if (choice.equals("Search") || choice.equals("1")) {
+            switch (choice.toLowerCase()) {
+            case "search":
+            case "1":
                 currLocation.search();
-            }
-            if (choice.contains("Move") || choice.contains("2")) {
-                moveMethod(choice);
-            }
-            if (choice.equals("Take") || choice.equals("3")) {
+                break;
+            case "take":
+            case "3":
                 if (currLocation.hasItem()) {
                     player.getInventory().addItem(currLocation.getItems());
                     currLocation.removeItem(currLocation.getItems().getName());
@@ -107,9 +112,19 @@ public class SpongebobsHouse extends Room {
                 else {
                     System.out.println("This location doesn't have anything to take.");
                 }
+                break;
+            case "inventory":
+            case "see inventory":
+            case "4":
+                player.getInventory().printAllItemDescriptions();
+                break;
+            case "quit":
+                return;
+                
             }
-            if (choice.equals("Inventory") || choice.equals("See Inventory") || choice.equals("4")) {
-                player.getInventory().printInventory();
+
+            if (choice.toLowerCase().contains("move") || choice.contains("2")) {
+                moveMethod(choice);
             }
             
             if (checkCompletionOfRoom()) {
@@ -120,6 +135,8 @@ public class SpongebobsHouse extends Room {
                 return;
             }
         }
+        
+        userInput.close();
     }
     
     /**
@@ -162,3 +179,4 @@ public class SpongebobsHouse extends Room {
         }
     }
 }
+
