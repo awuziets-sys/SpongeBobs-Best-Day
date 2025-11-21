@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 /**
  * Class: SquidwardsHouse
  * Author: Nuria Jurjo
@@ -43,7 +45,10 @@ public class SquidwardsHouse extends Room {
 	 * 
 	 * @param choice the method number (1, 2, or 3)
 	 */
-	public void attemptEntry(int choice) {
+	@Override
+	public void runroom() {
+		Scanner userInput = new Scanner(System.in);
+		int choice = userInput.nextInt(); //
 		switch (choice) {
 		case 1:
 			System.out.println(
@@ -53,8 +58,8 @@ public class SquidwardsHouse extends Room {
 			System.out.println("You launch yourself with a catapult and crash headfirst into the window. Ouch!");
 			break;
 		case 3:
-			System.out.println("You dig a tunnel underground, and pop up right in Squidward’s living room!");
-			System.out.println("Squidward: 'SPONGEBOB! What are you doing in my house?'");
+			System.out.println("You dig a tunnel underground, and pop up right in Squidward’s living room.");
+			System.out.println("Squidward: SPONGEBOB! What are you doing in my house?");
 			enteredSuccessfully = true;
 			completeRoom();
 			break;
@@ -62,7 +67,6 @@ public class SquidwardsHouse extends Room {
 			System.out.println("That’s not a valid option. Try again.");
 		}
 	}
-
 
     /**
      * Checks whether the player has successfully completed the room.
@@ -74,4 +78,3 @@ public class SquidwardsHouse extends Room {
 		return enteredSuccessfully;
 	}
 }
-
