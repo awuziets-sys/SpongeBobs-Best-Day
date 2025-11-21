@@ -51,22 +51,20 @@ public class SpongebobsHouse extends Room {
         
         //Adding locations to the list
         locationsList.add(bedroom);
-        locationNameList.add(bedroom.getLocationName());
         locationsList.add(kitchen);
-        locationNameList.add(kitchen.getLocationName());
         locationsList.add(closet);
-        locationNameList.add(closet.getLocationName());
         locationsList.add(stairs);
-        locationNameList.add(stairs.getLocationName());
         locationsList.add(livingroom);
-        locationNameList.add(livingroom.getLocationName());
         locationsList.add(bathroom);
-        locationNameList.add(bathroom.getLocationName());
         
         //setting the player for ease of access
         this.player = player;
         
-        //setting the start room
+        for (Location l : locationsList) {
+            locationNameList.add(l.getLocationName());
+        }
+        
+        // setting the start room
         currLocation = bedroom;
 
         System.out.println("Good morning Spongebob! It's another exciting day in Bikini Bottom.\n" 
@@ -76,11 +74,8 @@ public class SpongebobsHouse extends Room {
     
     @Override
     public boolean checkCompletionOfRoom() {
-        if (player.getInventory().contains("Work Hat") && player.getInventory().contains("Gary's Food")) {
-            return true;
-        }
-        
-        return false;
+    	return player.getInventory().contains("Work Hat")
+                && player.getInventory().contains("Gary's Food");
     }
 
     /**
@@ -114,7 +109,7 @@ public class SpongebobsHouse extends Room {
                 }
             }
             if (choice.equals("Inventory") || choice.equals("See Inventory") || choice.equals("4")) {
-                System.out.println("You are holding: " + player.getInventory());
+                player.getInventory().printInventory();
             }
             
             if (checkCompletionOfRoom()) {
@@ -167,4 +162,3 @@ public class SpongebobsHouse extends Room {
         }
     }
 }
-
