@@ -1,0 +1,112 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+/**
+ * Class: PatricksRock
+ * Author: Sam Adeyemo
+ * Course: CSE 201
+ * 
+ * Purpose: Room 3 of the game. SpongeBob must cheer Patrick up by making him
+ * an ice cream cone. Throughout this level, the player will go through different
+ * locations to find the required ingredients to make the cone, and then give it
+ * to Patrick.
+ */
+public class PatricksRock extends Room {
+	// the list of the locations inside Patricks rock
+	private List<Location> locationsList = new ArrayList<Location>();
+	private List<String> locationNameList = new ArrayList<String>();
+	
+	private Player player;
+	private Location currLocation;
+	// the ingredients needed for the icecream names
+	private static final String Waffle_Cone_Name = "Waffle Cone";
+	private static final String Ice_Cream_Name = "Vanilla Ice Cream";
+	private static final String Sprinkles_Name = "Chocolate Sprinkles";
+	private static final String Ice_Cream_Cone_Name = "Ice Cream Cone";
+	
+	/**
+	 * 
+	 * @param roomName the room name
+	 * @param roomDescription room description
+	 * @param roomComplete true if the room's complete, else false
+	 * @param nextRoom moves to the next room
+	 */
+	public PatricksRock(String roomName, String roomDescription, boolean roomComplete, Room nextRoom) {
+		super(roomName, roomDescription, roomComplete, nextRoom);
+	}
+	
+	public PatricksRock() {
+		this("Patrick's Rock", "Patrick is crying on his couch. Make him an"
+				+ "Ice Cream Cone to cheer him up.", false, null);
+	}
+	/**
+	 * overrides when the player first enters patricks rock the sets the
+	 * location, the items and the story.
+	 * @param player Spongebob
+	 */
+	@Override
+	public void enterRoom(Player player) {
+		this.player = player;
+		// making the required items
+		Item waffleCone = new Item(Waffle_Cone_Name, "crunchy waffle cone", null, null);
+		Item vanillaIceCream = new Item(Ice_Cream_Name, "vanilla ice cream", null, null);
+		Item chocolateSprinkles = new Item(Sprinkles_Name, "chocolate sprinkles", null, null);
+		
+		// locations inside patricks house
+		Location livingRoom = new Location("Living Room", chocolateSprinkles);
+		Location kitchen = new Location("Kitchen", vanillaIceCream);
+		Location pantry = new Location("Pantry", waffleCone);
+		Location closet = new Location("Closet", null);
+		
+		//linking locations
+		livingRoom.addSubLocation(kitchen);
+		livingRoom.addSubLocation(closet);
+		kitchen.addSubLocation(livingRoom);
+		kitchen.addSubLocation(pantry);
+		pantry.addSubLocation(kitchen);
+		closet.addSubLocation(livingRoom);
+		
+		//adding the locations to the list
+		locationsList.add(livingRoom);
+		locationNameList.add(livingRoom.getLocationName());
+		locationsList.add(kitchen);
+		locationNameList.add(kitchen.getLocationName());
+		locationsList.add(pantry);
+		locationNameList.add(pantry.getLocationName());
+		locationsList.add(closet);
+		locationNameList.add(closet.getLocationName());
+		
+		// the starting location
+		currLocation = livingRoom;
+		
+		//starting story description for patricks room
+		System.out.println("\nYou've entered Patrick's Rock.");
+		System.out.println("\nPatrick is on the couch, bawling loudly while watching TV.");
+		System.out.println("Spongebob, I don't have my boating license. \nYou"
+				+ " decide to cheer him up by making him an ice cream cone. \n"
+				+ "\nFind the waffle cone, vanilla ice cream, and chocolate sprinkles"
+				+ " then make the ice cream and give it to Patrick.");
+		
+		System.out.println("Tip: Use commands like: \n"
+				+ "[1] or 'Search'\n[2] <Location Name> or Move <Location Name>\n"
+				+ "[3] or 'Take'\n[4] or 'See Inventory'\n'Make Ice Cream'\n"
+				+ "'Give Ice Cream Cone'\n");
+		
+	}
+
+	@Override
+	public boolean checkCompletionOfRoom() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void runRoom() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
+
+}
