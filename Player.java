@@ -3,8 +3,8 @@
  * Author: Sam Adeyemo
  * @version 1.0
  * Course: CSE 201
- * Purpose: represents the player(spongebob) in the game. Handles
- * movement between rooms, managing inventory, and perfoming actions
+ * Purpose: Represents the player(SpongeBob) in the game. Handles
+ * movement between rooms, managing inventory, and performing actions
  */
 public class Player {
     private Room currentRoom; // tracks the current room the player is in
@@ -72,7 +72,7 @@ public class Player {
      * 
      * @param item1 the first item
      * @param item2 the second item
-     * @return a new combined item or null if the combination doesnt work
+     * @return a new combined item or null if the combination doesn't work
      */
     public Item combine(Item item1, Item item2) {
     	 if (item1 == null || item2 == null) {
