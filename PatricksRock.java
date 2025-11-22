@@ -82,17 +82,18 @@ public class PatricksRock extends Room {
 		
 		//starting story description for patricks room
 		System.out.println("You've entered Patrick's Rock.\n");
-		System.out.println("******** Objectives ********");
+		System.out.println("   ****************** Objectives ******************");
 		System.out.println("Patrick is on the couch, bawling loudly while watching TV.");
 		System.out.println("'Spongebob, I don't have my boating license.' \nYou"
 				+ " decide to cheer him up by making him an ice cream cone. \n"
-				+ "\nFind the waffle cone, vanilla ice cream, and chocolate sprinkles"
-				+ " then make the ice cream and give it to Patrick.");
-		
-		System.out.println("Useful Commands: \n"
+				+ "Find the waffle cone, vanilla ice cream, and chocolate sprinkles"
+				+ "\nthen make the ice cream and give it to Patrick.");
+		System.out.println("   ************************************************");
+		System.out.println();
+		System.out.println("   ************* Useful Commands: *****************\n"
 				+ "[1] or 'Search'\n[2] <Location Name> or Move <Location Name>\n"
-				+ "[3] or 'Take'\n[4] or 'See Inventory'\n'Make Ice Cream'\n"
-				+ "'Give Ice Cream Cone'\n");
+				+ "[3] or 'Take'\n[4] or 'See Inventory'\n[5] or 'Quit'\n'Make Ice Cream'\n"
+				+ "'Give Ice Cream Cone'\n   ************************************************");
 		
 	}
 	/**
@@ -134,8 +135,11 @@ public class PatricksRock extends Room {
 				takeItem();
 			}
 			else if (userChoice.equals("4") || userChoice.equalsIgnoreCase("See Inventory")) {
-				//System.out.println("\n You are holding: " + player.getInventory());
 				player.getInventory().printInventory();
+			}
+			else if (userChoice.equals("5") || userChoice.equalsIgnoreCase("Quit")) {
+			    System.out.println("You chose to quit Patrick's Rock.");
+			    return;
 			}
 			else if (userChoice.equalsIgnoreCase("Make Ice Cream")) {
 				makeIceCream();
@@ -148,7 +152,6 @@ public class PatricksRock extends Room {
 			}
 			
 		}
-		userInput.close();
 	}
 
 	/**
@@ -247,4 +250,3 @@ public class PatricksRock extends Room {
 	}
 	
 }
-
