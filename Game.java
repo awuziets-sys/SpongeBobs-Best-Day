@@ -2,207 +2,145 @@ import java.util.Scanner;
 
 /**
  * Class: Game
- * @author Sam Adeyemo, Testimony Awuzie, Andrew ALbert
- * @version 1.0
+ * @author Sam Adeyemo, Testimony Awuzie, Andrew Albert
+ * @version 2.1
  * Course : CSE 201 Fall 2025
  * Written: November 19, 2025
  *
- * Purpose: This class will control the flow of the game. It manages the player,
- * Keeps track of the current room, and handle the transition between the rooms.
- * 
+ * Purpose:
+ * This class controls the flow of the game. It manages the player,
+ * keeps track of the current room, and allows the player to decide
+ * whether to enter the next room or quit the game after completing one.
  */
 public class Game {
-	private Room currentRoom; // Tracks the current room SpongeBob is in
-	private Player player; // The player object
-	private boolean isGameRunning; // Keeps the game active or inactive
-	private Scanner userInput;	// Reading the user input
-	
-	/**
-	 * Constructor — Initializes scanner and default state.
-	 */
-	public Game() {
-		this.isGameRunning = false;
-		this.userInput = new Scanner(System.in);
-		setupGame();
-	}
-	
-	/**
+
+    private Room currentRoom;      // Tracks the current room
+    private Player player;          // The player object
+    private boolean isGameRunning;  // Keeps the game active or inactive
+    private Scanner userInput;      // Reads user input
+
+    /**
+     * Constructor — Initializes scanner and default state.
+     */
+    public Game() {
+        this.userInput = new Scanner(System.in);
+        setupGame();
+    }
+
+    /**
      * Sets up all rooms, links them in order, and initializes player.
      */
-	private void setupGame() {
-		System.out.println("Initializing SpongeBob’s Best Day Ever...\n");
-		Inventory inventory = new Inventory();
+    private void setupGame() {
+        System.out.println("Initializing SpongeBob’s Best Day Ever...\n");
+
+        Inventory inventory = new Inventory();
 
         // Room object declarations
-		 Room spongebobsHouse = new SpongebobsHouse();
-//		 Room squidwardsHouse = new SquidwardsHouse();
-//		 Room patricksRock = new PatricksRock();
-//		 Room sandysDome = new SandysDome();
-//		 Room krustyKrab = new KrustyKrab();
-//
-//		// Link rooms in order of progression
-//		 spongebobsHouse.setNextRoom(squidwardsHouse);
-//		 squidwardsHouse.setNextRoom(patricksRock);
-//		 patricksRock.setNextRoom(sandysDome);
-//		 sandysDome.setNextRoom(krustyKrab);
-//		 krustyKrab.setNextRoom(null);
-		
-        // Set starting point for the game   
-		this.currentRoom = spongebobsHouse;
-		this.player = new Player(currentRoom, inventory, "001", "SpongeBob"); // initialize the player
-		
-	}
+        Room spongebobsHouse = new SpongebobsHouse();
+        Room squidwardsHouse = new SquidwardsHouse();
+        Room patricksRock = new PatricksRock();
+        Room sandysDome = new SandysDome();
+        Room krustyKrab = new KrustyKrab();
 
-	/**
-	 * This function starts the game by making the playing and loading them 
-	 * into the first room. It prints an introduction and then the main game
-	 * loop begins
-	 */
-	public void startGame() {	
-		printIntro();
-		isGameRunning = true; // Starting the main loop
+        // Link rooms in order of progression
+        spongebobsHouse.setNextRoom(squidwardsHouse);
+        squidwardsHouse.setNextRoom(patricksRock);
+        patricksRock.setNextRoom(sandysDome);
+        sandysDome.setNextRoom(krustyKrab);
+        krustyKrab.setNextRoom(null);
 
-		System.out.println("\nWould you like to begin the game and enter SpongeBob’s House?");
-        System.out.println("Type 'enter' to begin, or 'quit' to end the game.");
+        // Initialize the starting room and player
+        currentRoom = spongebobsHouse;
+        player = new Player(currentRoom, inventory, "001", "SpongeBob");
+    }
 
-        while (isGameRunning) {
-            System.out.print("> ");
-            String command = userInput.nextLine().trim().toLowerCase();
-
-            handleCommand(command);        
-		}	
-	}
-	
-	/**
-	 * Handles Player Commands
-	 * @param command
-	 */
-	private void handleCommand(String command) {
-		switch (command) {
-        case "enter":
-            enterRoom();
-            break;
-        case "next":
-            moveToNextRoom();
-            break;
-        case "progress":
-            checkProgress();
-            break;
-        case "inventory":
-            checkInventory();
-            break;
-        case "describe":
-            describeItems();
-            break;
-        case "help":
-            printHelp();
-            break;
-        case "quit":
-            endGame();
-            break;
-        default:
-            System.out.println("Unknown command. Type 'help' for a list of commands.");
-            break;
-		}
-	}
-
-	/**
-     * Prints the list of available commands.
+    /**
+     * This function starts the game. It prints an introduction
+     * and loads the player into the first room.
      */
-    private void printHelp() {
-        System.out.println("\nAvailable Commands:");
-        System.out.println(" enter     - Enter the current room");
-        System.out.println(" next      - Move to the next room (if current is complete)");
-        System.out.println(" progress  - Check current room progress");
-        System.out.println(" inventory - Check items in SpongeBob’s inventory");
-        System.out.println(" describe  - Get item descriptions");
-        System.out.println(" help      - Show this help menu");
-        System.out.println(" quit      - End the game\n");
-    }
-	
-	/**
-	 * 
-	 */
-	private void printIntro() {
-		System.out.println("Welcome to SpongeBob's Best Day Ever!");
-        System.out.println("----------------------------------------------------------");
-		System.out.println("Spongebob's end goal is to celebrate with everyone at the Krusty Krab.\n"
-				+ "He has to go to multiple locations in Bikini Bottom, "
-				+ "completing different tasks for his friends.\n"
-				+ "At the final location, if he completes his tasks successfully, he wins.\n"
-				+ "Help him have his Best Day Ever!");
-		
-        System.out.println("\nType 'help' to view all commands.");
-	}
-	
-	/**
-	 * 
-	 */
-	public void moveToNextRoom() {
-		if (currentRoom != null && currentRoom.isRoomComplete()) {
-			Room next = currentRoom.getNextRoom();
-	        if (next == null) {
-	            System.out.println("\nAll rooms complete! Congratulations on completing the game!");
-	            endGame();
-	        } else {
-	            System.out.println("\nMoving to Next Room: " + next.getRoomName());
-	            currentRoom = next;
-	        }   
-        } else {
-        	System.out.println("You cannot move yet! Finish this room first.");
+    public void startGame() {
+        printIntro();
+        isGameRunning = true;
+
+        while (isGameRunning && currentRoom != null) {
+
+            System.out.println("\nLocation: " + currentRoom.getRoomName());
+            System.out.println("--------------------------------");
+
+            // Enter and run the logic for the current room
+            currentRoom.enterRoom(player);
+            currentRoom.runRoom();
+
+            // If the room is complete, ask the player what to do next
+            if (currentRoom.isRoomComplete()) {
+                promptNextAction();
+            }
         }
-	}
-	
-	/**
-	 * Prints SpongeBob's Current Inventory
-	 */
-	private void checkInventory() {
-        System.out.println("\nChecking inventory...");
-        player.getInventory().printInventory();
+
+        endGame();
     }
-	
-	/**
-	 * Triggers the Logic inside the Current Room
-	 * Entering the Room and displays it
-	 */
-	public void enterRoom() {
-		if (currentRoom == null) {
-            System.out.println("There are no rooms available!");
+
+    /**
+     * Gives the player the option to continue to the next room
+     * or quit the game after completing a room.
+     */
+    private void promptNextAction() {
+        Room next = currentRoom.getNextRoom();
+
+        if (next == null) {
+            System.out.println("\nAll rooms complete. You beat the game!");
+            isGameRunning = false;
             return;
         }
 
-        System.out.println("\nEntering " + currentRoom.getRoomName() + "...");
-        currentRoom.enterRoom(player);
-        currentRoom.runRoom(); // Each room implements its own logic
+        while (true) {
+            System.out.println("\nWould you like to enter the next room or quit?");
+            System.out.println("Type 'enter' to continue or 'quit' to end the game.");
+            System.out.print("> ");
+
+            String choice = userInput.nextLine().trim().toLowerCase();
+
+            if (choice.equals("enter")) {
+                currentRoom = next;
+                player.enterRoom(currentRoom);
+                break;
+            }
+
+            if (choice.equals("quit")) {
+                isGameRunning = false;
+                break;
+            }
+
+            System.out.println("Invalid input. Please type 'enter' or 'quit'.");
+        }
     }
-	
-	/**
-     * Prints item descriptions (if available).
+
+    /**
+     * Displays the introduction text for the game.
      */
-    private void describeItems() {
-        System.out.println("\nItem Descriptions:");
-        player.getInventory().printAllItemDescriptions();
+    private void printIntro() {
+        System.out.println("Welcome to SpongeBob's Best Day Ever!");
+        System.out.println("----------------------------------------------------------");
+        System.out.println("Spongebob's end goal is to celebrate with everyone at the Krusty Krab.\n"
+                + "He has to go to multiple locations in Bikini Bottom, "
+                + "completing different tasks for his friends.\n"
+                + "At the final location, if he completes his tasks successfully, he wins.\n"
+                + "Help him have his Best Day Ever!");
     }
-    
-	/**
-	 * Checks the Progress of the Current Room the Player is in
-	 */
-	public void checkProgress() {
-		System.out.println("/nGame Progress");
-		System.out.println("Checking Room Progress...");
-		if (currentRoom.checkCompletionOfRoom()) {
-			System.out.println("Room is Complete. Well Done!");
-		} else {
-			System.out.println("There are Tasks left in This Room.");
-		}
-	}
-	
-	/**
-	 * Displays a Thank you Message if the player finishes or stops the game
-	 */
-	public void endGame() {
-		System.out.println("Thank you for playing SpongeBob's Best Day Ever!");
-		this.isGameRunning = false;
-		userInput.close();	
-	}
+
+    /**
+     * Displays a Thank you Message if the player finishes or stops the game
+     */
+    public void endGame() {
+        System.out.println("\nThank you for playing SpongeBob's Best Day Ever!");
+        userInput.close();
+    }
+
+    /**
+     * Main method to start the game.
+     */
+    public static void main(String[] args) {
+        Game game = new Game();
+        game.startGame();
+    }
 }
