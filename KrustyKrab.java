@@ -291,5 +291,6 @@ public class KrustyKrab extends Room {
 
         // Mark this room done
         completeRoom();
+        System.out.println("\nType 'next' to continue.");
     }
 }
