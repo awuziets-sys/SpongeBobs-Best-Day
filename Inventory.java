@@ -116,7 +116,6 @@ public class Inventory {
             return;
         }
 
-        System.out.println("Item Descriptions:");
         for (int i = 0; i < size; i++) {
             System.out.println("• " + items[i].getName() + " — " + items[i].getDescription());
         }
