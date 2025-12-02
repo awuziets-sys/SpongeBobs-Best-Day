@@ -299,12 +299,4 @@ public class Game {
         System.out.println("Thank you for playing SpongeBob's Best Day Ever!");
         this.isGameRunning = false;
     }
-
-    /**
-     * Entry point for the game.
-     */
-    public static void main(String[] args) {
-        Game newGame = new Game();
-        newGame.startGame();
-    }
 }
