@@ -134,11 +134,11 @@ public class Location {
 		return subLocations;
 	}
 
-	public void addSubLocation(Location l) {
-		this.subLocations.add(l);
+	public void addSubLocation(Location location) {
+		this.subLocations.add(location);
 	}
 	
-	public void removeSubLocation(Location l) {
-	    this.subLocations.remove(l);
+	public void removeSubLocation(Location location) {
+	    this.subLocations.remove(location);
 	}
 }
