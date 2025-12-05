@@ -249,7 +249,7 @@ public class KrustyKrab extends Room {
 
         String[] questions = {
             "Question 1: What color is SpongeBob? (Yellow/Blue/Red) ",
-            "Question 2: How many legs does Patrick have? (4/6/8) ",
+            "Question 2: How many legs does Patrick have? (2/6/8) ",
             "Question 3: What is Mr. Krabs' favorite thing? (Money/Boats/Patty) ",
             "Question 4: Which sport does Sandy enjoy? (Karate/Football/Swimming) ",
             "Question 5: What instrument does Squidward play? (Clarinet/Piano/Drums) "
@@ -257,7 +257,7 @@ public class KrustyKrab extends Room {
 
         String[] answers = {
             "yellow",
-            "4",
+            "2",
             "money",
             "karate",
             "clarinet"
